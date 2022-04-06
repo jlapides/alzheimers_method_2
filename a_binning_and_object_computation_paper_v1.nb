@@ -1,0 +1,799 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     35291,        791]
+NotebookOptionsPosition[     31424,        717]
+NotebookOutlinePosition[     31821,        733]
+CellTagsIndexPosition[     31778,        730]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "SetDirectory", "[", 
+   "\"\</Users/jeffreylapides/Documents/Mathematica_new/alzheimers\>\"", 
+   "]"}], ";"}]], "Input",ExpressionUUID->"378874d9-893a-424b-932f-\
+2928d53da1a4"],
+
+Cell[BoxData[""], "Input",ExpressionUUID->"168be70a-b23e-4aa2-bbcf-081a8e5e3252"],
+
+Cell[CellGroupData[{
+
+Cell["Data Loading", "Section",
+ CellChangeTimes->{{3.8576715780038767`*^9, 
+  3.857671580338274*^9}},ExpressionUUID->"86c95e37-f3ae-4437-97c8-\
+274617d39fc5"],
+
+Cell["\<\
+>>> Use your own data, biomedataFilt,  here after it has been processed
+>>> It should have dimensions of number of samples by number of microbes plus \
+1.
+>>> Each row begins with a sample id followed by the normalized abundances \
+for each microbe
+>>> An example is below
+>>> The first row is a header that contains the microbe name in columns >= 2.\
+\
+\>", "Text",
+ CellChangeTimes->{{3.857671592905161*^9, 3.857671629095488*^9}, {
+  3.8576719113325233`*^9, 3.857672015026013*^9}, {3.857672049000835*^9, 
+  3.857672056591342*^9}, {3.85767209885363*^9, 
+  3.857672135787999*^9}},ExpressionUUID->"811d76f6-43b9-4366-a4c1-\
+9d6b6055a612"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"biomedataFilt", "[", 
+  RowBox[{"[", "2", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.785840258188809*^9, 3.785840284456918*^9}},
+ CellLabel->
+  "In[1171]:=",ExpressionUUID->"d036156b-fd48-433b-a43e-604552800ac3"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"2016P1_lbc10\"\>", ",", "92.92034027723595`", ",", "0.`", ",", 
+   "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", 
+   "0.14749260361466024`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.8849556216879613`", ",", "0.`", ",", "0.`", ",", "0.`",
+    ",", "0.`", ",", "0.`", ",", "6.04719674820107`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", 
+   ",", "0.`", ",", "0.`", ",", "0.`"}], "}"}]], "Output",
+ CellChangeTimes->{3.857671819474113*^9},
+ CellLabel->
+  "Out[1171]=",ExpressionUUID->"928c59db-893b-4264-993b-79c9f0059f41"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"biomedataFilt", "[", 
+  RowBox[{"[", "1", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.857672066344214*^9, 3.857672066622376*^9}},
+ CellLabel->
+  "In[1172]:=",ExpressionUUID->"a7f1369b-998d-4cf8-b55b-38add9e4ef75"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "\"\<sampleid\>\"", ",", "\"\<Propionibacterium_acnes\>\"", ",", 
+   "\"\<Comamonas_jiangduensis\>\"", ",", "\"\<Eubacterium\>\"", ",", 
+   "\"\<Lactobacillus\>\"", ",", "\"\<Lachnoclostridium\>\"", ",", 
+   "\"\<Clostridioides\>\"", ",", "\"\<Sphingomonas\>\"", ",", 
+   "\"\<Veillonella\>\"", ",", "\"\<Anaerococcus\>\"", ",", 
+   "\"\<Cupriavidus\>\"", ",", "\"\<Prevotella\>\"", ",", 
+   "\"\<Acinetobacter_junii\>\"", ",", "\"\<Sphingobium\>\"", ",", 
+   "\"\<Brevundimonas\>\"", ",", "\"\<Acidovorax\>\"", ",", 
+   "\"\<Ochrobactrum\>\"", ",", "\"\<Variovorax\>\"", ",", 
+   "\"\<Paraburkholderia\>\"", ",", "\"\<Zoogloea\>\"", ",", 
+   "\"\<Mesorhizobium\>\"", ",", "\"\<Cellulosimicrobium\>\"", ",", 
+   "\"\<Comamonas_testosteroni\>\"", ",", "\"\<Cloacibacterium\>\"", ",", 
+   "\"\<Herbaspirillum\>\"", ",", "\"\<Bordetella\>\"", ",", 
+   "\"\<Pseudomonas\>\"", ",", "\"\<Tyzzerella\>\"", ",", 
+   "\"\<Comamonas_denitrificans\>\"", ",", "\"\<Bosea\>\"", ",", 
+   "\"\<Pseudoxanthomonas\>\"", ",", "\"\<Methylobacter\>\"", ",", 
+   "\"\<Flavobacterium\>\"", ",", "\"\<Aciditerrimonas\>\"", ",", 
+   "\"\<Romboutsia\>\"", ",", "\"\<Brevibacterium\>\"", ",", 
+   "\"\<Dietzia\>\"", ",", "\"\<Corynebacterium\>\"", ",", 
+   "\"\<Pedobacter\>\"", ",", "\"\<Rhizobium\>\"", ",", 
+   "\"\<Comamonas_nitrativorans\>\"", ",", "\"\<Lampropedia\>\"", ",", 
+   "\"\<Bacillus\>\"", ",", "\"\<Peredibacter\>\"", ",", "\"\<Klebsiella\>\"",
+    ",", "\"\<Vulcaniibacterium\>\"", ",", "\"\<Staphylococcus\>\"", ",", 
+   "\"\<Novosphingobium\>\"", ",", "\"\<Ottowia\>\"", ",", 
+   "\"\<Stenotrophomonas\>\"", ",", "\"\<Streptococcus\>\"", ",", 
+   "\"\<Roseomonas\>\"", ",", "\"\<Thermacetogenium\>\"", ",", 
+   "\"\<Dongia\>\"", ",", "\"\<Conexibacter\>\"", ",", "\"\<Methylocapsa\>\"",
+    ",", "\"\<Hymenobacter\>\"", ",", "\"\<Rhizobacter\>\"", ",", 
+   "\"\<Shigella\>\"", ",", "\"\<Gaiella\>\"", ",", "\"\<Microlunatus\>\"", 
+   ",", "\"\<Acidicapsa\>\"", ",", "\"\<Janthinobacterium\>\"", ",", 
+   "\"\<Paracoccus\>\"", ",", "\"\<Chthoniobacter\>\"", ",", 
+   "\"\<Actinoallomurus\>\"", ",", "\"\<Ideonella\>\"", ",", 
+   "\"\<Flavisolibacter\>\"", ",", "\"\<Nocardioides\>\"", ",", 
+   "\"\<Enterococcus\>\"", ",", "\"\<Blastomonas\>\"", ",", 
+   "\"\<Lysinibacillus\>\"", ",", "\"\<Agrococcus\>\"", ",", 
+   "\"\<Chryseobacterium\>\"", ",", "\"\<Alkanindiges\>\"", ",", 
+   "\"\<Rothia\>\"", ",", "\"\<Enhydrobacter\>\"", ",", "\"\<Neisseria\>\"", 
+   ",", "\"\<Marinomonas\>\"", ",", "\"\<Nitrosospira\>\"", ",", 
+   "\"\<Lachnoanaerobaculum\>\"", ",", "\"\<Cutibacterium\>\"", ",", 
+   "\"\<Gemmatimonas\>\"", ",", "\"\<Janibacter\>\"", ",", 
+   "\"\<Schlegelella\>\"", ",", "\"\<Microbacterium\>\"", ",", 
+   "\"\<Gemella\>\"", ",", "\"\<Anoxybacillus\>\"", ",", 
+   "\"\<Anaerosporobacter\>\"", ",", "\"\<Micrococcus\>\"", ",", 
+   "\"\<Tabrizicola\>\"", ",", "\"\<Hydrotalea\>\"", ",", 
+   "\"\<Acinetobacter_seohaensis\>\"", ",", "\"\<Sphingorhabdus\>\"", ",", 
+   "\"\<Aquabacterium\>\"", ",", "\"\<Flavonifractor\>\"", ",", 
+   "\"\<Ralstonia\>\"", ",", "\"\<Methylobacterium\>\"", ",", 
+   "\"\<Peptoniphilus\>\"", ",", "\"\<Ramlibacter\>\"", ",", 
+   "\"\<Dolosigranulum\>\"", ",", "\"\<Myxococcus\>\"", ",", 
+   "\"\<Niabella\>\"", ",", "\"\<Blautia\>\"", ",", "\"\<Kocuria\>\"", ",", 
+   "\"\<Granulicatella\>\"", ",", "\"\<Derxia\>\"", ",", 
+   "\"\<Sulfitobacter\>\"", ",", "\"\<Neomicrococcus\>\"", ",", 
+   "\"\<Candidatus_Koribacter\>\"", ",", "\"\<Sediminibacterium\>\"", ",", 
+   "\"\<Hyphomicrobium\>\"", ",", "\"\<Azonexus\>\"", ",", 
+   "\"\<Reyranella\>\"", ",", "\"\<Actinomyces\>\"", ",", 
+   "\"\<Flavihumibacter\>\"", ",", "\"\<Murdochiella\>\"", ",", 
+   "\"\<Acinetobacter_tjernbergiae\>\"", ",", "\"\<Anaerotruncus\>\"", ",", 
+   "\"\<Anabaena\>\"", ",", "\"\<Acinetobacter_baumannii\>\"", ",", 
+   "\"\<Comamonas_terrae\>\"", ",", "\"\<Dialister\>\"", ",", 
+   "\"\<Ornatilinea\>\"", ",", "\"\<Bergeyella\>\"", ",", 
+   "\"\<Actinobaculum\>\"", ",", "\"\<Delftia\>\"", ",", 
+   "\"\<Burkholderia\>\"", ",", "\"\<Solirubrobacter\>\"", ",", 
+   "\"\<Candidatus_Solibacter\>\"", ",", "\"\<Nitratireductor\>\"", ",", 
+   "\"\<Caulobacter\>\"", ",", "\"\<Massilia\>\"", ",", 
+   "\"\<Alloprevotella\>\"", ",", "\"\<Moraxella\>\"", ",", 
+   "\"\<Herbiconiux\>\"", ",", "\"\<Kytococcus\>\"", ",", 
+   "\"\<Ferrovibrio\>\"", ",", "\"\<Arthrobacter\>\"", ",", 
+   "\"\<Brachybacterium\>\"", ",", "\"\<Empedobacter\>\"", ",", 
+   "\"\<Singulisphaera\>\"", ",", "\"\<Vampirovibrio\>\"", ",", 
+   "\"\<Cylindrospermum\>\"", ",", "\"\<Jeotgalicoccus\>\"", ",", 
+   "\"\<Leptotrichia\>\"", ",", "\"\<Legionella\>\"", ",", 
+   "\"\<Meiothermus\>\"", ",", "\"\<Alistipes\>\"", ",", 
+   "\"\<Erysipelatoclostridium\>\"", ",", "\"\<Sphingobacterium\>\"", ",", 
+   "\"\<Thermomonas\>\"", ",", "\"\<Oscillibacter\>\"", ",", 
+   "\"\<Cellulomonas\>\"", ",", "\"\<Blastocatella\>\"", ",", 
+   "\"\<Paracraurococcus\>\"", ",", "\"\<Pigmentiphaga\>\"", ",", 
+   "\"\<Rhodococcus\>\"", ",", "\"\<Achromobacter\>\"", ",", 
+   "\"\<Granulibacter\>\"", ",", "\"\<Aquisphaera\>\"", ",", 
+   "\"\<Pelobacter\>\"", ",", "\"\<Rubellimicrobium\>\"", ",", 
+   "\"\<Sphaerobacter\>\"", ",", "\"\<Epilithonimonas\>\"", ",", 
+   "\"\<Bradyrhizobium\>\"", ",", "\"\<Methylibium\>\"", ",", 
+   "\"\<Jatrophihabitans\>\"", ",", "\"\<Noviherbaspirillum\>\"", ",", 
+   "\"\<Finegoldia\>\"", ",", "\"\<Ruminiclostridium\>\"", ",", 
+   "\"\<Virgibacillus\>\"", ",", "\"\<Armatimonas\>\"", ",", 
+   "\"\<Chroococcidiopsis\>\"", ",", "\"\<Altererythrobacter\>\"", ",", 
+   "\"\<Bacteroides\>\"", ",", "\"\<Micromonospora\>\"", ",", 
+   "\"\<Scopulibacillus\>\"", ",", "\"\<Spirosoma\>\"", ",", 
+   "\"\<Calothrix\>\"", ",", "\"\<Acinetobacter_guillouiae\>\"", ",", 
+   "\"\<Alteromonas\>\"", ",", "\"\<Aliihoeflea\>\"", ",", 
+   "\"\<Silanimonas\>\"", ",", "\"\<Ornithobacterium\>\"", ",", 
+   "\"\<Sporocytophaga\>\"", ",", "\"\<Rhodoplanes\>\"", ",", 
+   "\"\<Asticcacaulis\>\"", ",", "\"\<Proteiniphilum\>\"", ",", 
+   "\"\<Limnobacter\>\"", ",", "\"\<Pseudacidovorax\>\"", ",", 
+   "\"\<Exiguobacterium\>\"", ",", "\"\<Duganella\>\"", ",", 
+   "\"\<Devosia\>\"", ",", "\"\<Diaphorobacter\>\"", ",", 
+   "\"\<Papillibacter\>\"", ",", "\"\<Skermanella\>\"", ",", 
+   "\"\<Candidatus_Liberibacter\>\"", ",", "\"\<Rhodopseudomonas\>\"", ",", 
+   "\"\<Clostridium\>\"", ",", "\"\<Alicycliphilus\>\"", ",", 
+   "\"\<Eggerthella\>\"", ",", "\"\<Gemmiger\>\"", ",", 
+   "\"\<Actinoplanes\>\"", ",", "\"\<Pseudorhodoferax\>\"", ",", 
+   "\"\<Mycobacterium\>\"", ",", "\"\<Leuconostoc\>\"", ",", 
+   "\"\<Candidatus_Aquiluna\>\"", ",", "\"\<Novispirillum\>\"", ",", 
+   "\"\<Ilumatobacter\>\"", ",", "\"\<Asanoa\>\"", ",", 
+   "\"\<Acinetobacter_haemolyticus\>\"", ",", "\"\<Crinalium\>\"", ",", 
+   "\"\<Ruminococcus\>\"", ",", "\"\<Facklamia\>\"", ",", 
+   "\"\<Christensenella\>\"", ",", "\"\<Mucilaginibacter\>\"", ",", 
+   "\"\<Phenylobacterium\>\"", ",", "\"\<Frondihabitans\>\"", ",", 
+   "\"\<Marmoricola\>\"", ",", "\"\<Anaerobacterium\>\"", ",", 
+   "\"\<Desulfonispora\>\"", ",", "\"\<Paenibacillus\>\"", ",", 
+   "\"\<Nitrolancea\>\"", ",", "\"\<Gemmata\>\"", ",", 
+   "\"\<Haematobacter\>\"", ",", "\"\<Snodgrassella\>\"", ",", 
+   "\"\<Planctopirus\>\"", ",", "\"\<Methyloversatilis\>\"", ",", 
+   "\"\<Parabacteroides\>\""}], "}"}]], "Input",
+ CellChangeTimes->{{3.857672082472979*^9, 
+  3.857672085560026*^9}},ExpressionUUID->"05ac5c29-56c0-4373-a755-\
+74b31fa178cd"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Object Computation", "Section",
+ CellChangeTimes->{{3.857671511953376*^9, 
+  3.857671517331427*^9}},ExpressionUUID->"befe17dc-dc05-4c04-a6cd-\
+fa47526e1fa8"],
+
+Cell[CellGroupData[{
+
+Cell["Binning Computation", "Subsection",
+ CellChangeTimes->{{3.80322136846395*^9, 3.8032213711997147`*^9}, {
+  3.857671351217257*^9, 
+  3.857671352056406*^9}},ExpressionUUID->"ce327054-3205-4655-846b-\
+3a18c3e89c77"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"binMintk", "=", "0.00001"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"binMaxtk", "=", "100"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"binWidthLogtk", "=", "0.5"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"binstk", "=", 
+   RowBox[{"{", 
+    RowBox[{"10", "^", 
+     RowBox[{"Range", "[", 
+      RowBox[{
+       RowBox[{"Log", "[", 
+        RowBox[{"10", ",", "binMintk"}], "]"}], ",", 
+       RowBox[{"Log", "[", 
+        RowBox[{"10", ",", "binMaxtk"}], "]"}], ",", "binWidthLogtk"}], 
+      "]"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"binstk", "=", 
+   RowBox[{"Flatten", "@", "binstk"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"binstk", "[", 
+    RowBox[{"[", "1", "]"}], "]"}], "=", "0"}], 
+  ";"}], "\[IndentingNewLine]", "binstk", "\[IndentingNewLine]", 
+ RowBox[{"bins1", "=", "binstk"}]}], "Input",
+ CellChangeTimes->{{3.718477892501429*^9, 3.718477892502736*^9}, {
+   3.718477954179899*^9, 3.7184779575960484`*^9}, {3.71847800236418*^9, 
+   3.718478011345207*^9}, 3.718478067649941*^9, {3.7184781317748623`*^9, 
+   3.718478152338299*^9}, 3.718478819857194*^9, 3.718478851870431*^9, {
+   3.718478930726009*^9, 3.718478952107771*^9}, {3.7394587850471087`*^9, 
+   3.739458804640606*^9}, {3.7398037192745867`*^9, 3.739803726607149*^9}, {
+   3.8029429169128733`*^9, 3.8029429359499207`*^9}, {3.802943000154943*^9, 
+   3.802943001155737*^9}},
+ CellLabel->
+  "In[1173]:=",ExpressionUUID->"334d2b31-c5bd-4516-bec9-402cc6e26276"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0", ",", "0.000031622776601683795`", ",", "0.0001`", ",", 
+   "0.00031622776601683794`", ",", "0.001`", ",", "0.0031622776601683794`", 
+   ",", "0.01`", ",", "0.03162277660168379`", ",", "0.1`", ",", 
+   "0.31622776601683794`", ",", "1.`", ",", "3.1622776601683795`", ",", 
+   "10.`", ",", "31.622776601683793`", ",", "100.`"}], "}"}]], "Output",
+ CellChangeTimes->{{3.718478514202167*^9, 3.718478546895895*^9}, {
+   3.71847899954635*^9, 3.7184790436189404`*^9}, 3.7184791533135023`*^9, 
+   3.7184821352178707`*^9, 3.718482364746564*^9, {3.719757814273831*^9, 
+   3.719757817027417*^9}, 3.730796394075204*^9, 3.730804960859606*^9, {
+   3.739458779472601*^9, 3.739458809171392*^9}, 3.7396078915916033`*^9, 
+   3.739803753157277*^9, {3.739804131118771*^9, 3.739804136874848*^9}, {
+   3.7398041730424833`*^9, 3.739804203349869*^9}, {3.750800604628848*^9, 
+   3.7508006230326853`*^9}, 3.784287038637496*^9, 3.785840792330542*^9, 
+   3.785884347534107*^9, 3.802524625006836*^9, 3.8032892406560583`*^9, 
+   3.803329821926374*^9, 3.804719189835515*^9, 3.805039168985682*^9, 
+   3.806163728694281*^9, 3.806701730528459*^9, 3.8067478194189653`*^9, 
+   3.8067485152071457`*^9, 3.807279509297738*^9, 3.807294254838079*^9, 
+   3.807294441286141*^9, 3.81334490727969*^9, 3.817476541300164*^9, 
+   3.819127895918117*^9, 3.822339999664706*^9, 3.837551294088793*^9, 
+   3.857207910376649*^9, 3.857672195787571*^9},
+ CellLabel->
+  "Out[1179]=",ExpressionUUID->"2b1e281b-502b-41ad-a3ee-b874b5dbcde6"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0", ",", "0.000031622776601683795`", ",", "0.0001`", ",", 
+   "0.00031622776601683794`", ",", "0.001`", ",", "0.0031622776601683794`", 
+   ",", "0.01`", ",", "0.03162277660168379`", ",", "0.1`", ",", 
+   "0.31622776601683794`", ",", "1.`", ",", "3.1622776601683795`", ",", 
+   "10.`", ",", "31.622776601683793`", ",", "100.`"}], "}"}]], "Output",
+ CellChangeTimes->{{3.718478514202167*^9, 3.718478546895895*^9}, {
+   3.71847899954635*^9, 3.7184790436189404`*^9}, 3.7184791533135023`*^9, 
+   3.7184821352178707`*^9, 3.718482364746564*^9, {3.719757814273831*^9, 
+   3.719757817027417*^9}, 3.730796394075204*^9, 3.730804960859606*^9, {
+   3.739458779472601*^9, 3.739458809171392*^9}, 3.7396078915916033`*^9, 
+   3.739803753157277*^9, {3.739804131118771*^9, 3.739804136874848*^9}, {
+   3.7398041730424833`*^9, 3.739804203349869*^9}, {3.750800604628848*^9, 
+   3.7508006230326853`*^9}, 3.784287038637496*^9, 3.785840792330542*^9, 
+   3.785884347534107*^9, 3.802524625006836*^9, 3.8032892406560583`*^9, 
+   3.803329821926374*^9, 3.804719189835515*^9, 3.805039168985682*^9, 
+   3.806163728694281*^9, 3.806701730528459*^9, 3.8067478194189653`*^9, 
+   3.8067485152071457`*^9, 3.807279509297738*^9, 3.807294254838079*^9, 
+   3.807294441286141*^9, 3.81334490727969*^9, 3.817476541300164*^9, 
+   3.819127895918117*^9, 3.822339999664706*^9, 3.837551294088793*^9, 
+   3.857207910376649*^9, 3.857672195806394*^9},
+ CellLabel->
+  "Out[1180]=",ExpressionUUID->"bc563ac2-d883-438f-97b2-dba2d71ebff0"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "@", "%"}]], "Input",
+ CellChangeTimes->{{3.785840798242199*^9, 3.785840801063797*^9}},
+ CellLabel->
+  "In[308]:=",ExpressionUUID->"44213d52-e4a3-42e1-aa79-ef98685f0796"],
+
+Cell[BoxData["15"], "Output",
+ CellChangeTimes->{3.785840801784197*^9, 3.802524628445352*^9},
+ CellLabel->
+  "Out[308]=",ExpressionUUID->"d32303e0-4ec1-410c-85b5-686273687cdc"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"b", "=", 
+  RowBox[{"rangeF", "[", "binstk", "]"}]}]], "Input",
+ CellChangeTimes->{{3.802524635862804*^9, 3.8025246449785233`*^9}, {
+  3.822340051800273*^9, 3.822340052848874*^9}},
+ CellLabel->
+  "In[1181]:=",ExpressionUUID->"6cb63304-6416-4c44-8845-36985d804f6b"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"1", "0", "0.000031622776601683795`"},
+    {"2", "0.000031622776601683795`", "0.0001`"},
+    {"3", "0.0001`", "0.00031622776601683794`"},
+    {"4", "0.00031622776601683794`", "0.001`"},
+    {"5", "0.001`", "0.0031622776601683794`"},
+    {"6", "0.0031622776601683794`", "0.01`"},
+    {"7", "0.01`", "0.03162277660168379`"},
+    {"8", "0.03162277660168379`", "0.1`"},
+    {"9", "0.1`", "0.31622776601683794`"},
+    {"10", "0.31622776601683794`", "1.`"},
+    {"11", "1.`", "3.1622776601683795`"},
+    {"12", "3.1622776601683795`", "10.`"},
+    {"13", "10.`", "31.622776601683793`"},
+    {"14", "31.622776601683793`", "100.`"}
+   },
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.857672197990028*^9},
+ CellLabel->
+  "Out[1181]//TableForm=",ExpressionUUID->"9cbeb7db-ce10-4412-9f21-\
+f2fc23493502"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Objects for each sample", "Subsection",
+ CellChangeTimes->{{3.857671542200979*^9, 
+  3.857671548115102*^9}},ExpressionUUID->"12799233-24f7-461b-9b7c-\
+4eee8baf2bd2"],
+
+Cell["\<\
+>>> Note there are two copies of the binned data
+>>> tk1 has a sample index in column 1 followed by a list of objects.
+>>> tk2 has a sample index in column 1 and sample name in column 2 followed \
+by a list of objects.\
+\>", "Text",
+ CellChangeTimes->{{3.8576727330352383`*^9, 
+  3.857672814360154*^9}},ExpressionUUID->"4ccf5767-7277-4f38-a9b3-\
+6a2e7340342f"],
+
+Cell[BoxData[""], "Input",ExpressionUUID->"6de283dd-9d8b-46e5-ad8e-2f29194d8a35"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"tk1", "=", 
+   RowBox[{"MapIndexed", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"#2", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", "#1"}], "}"}], "&"}], ",", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"intervF1", "[", 
+        RowBox[{
+         RowBox[{"biomedataFilt", "[", 
+          RowBox[{"[", 
+           RowBox[{
+            RowBox[{"k", "+", "1"}], ",", 
+            RowBox[{"j", "+", "1"}]}], "]"}], "]"}], ",", 
+         RowBox[{"biomedataFilt", "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ",", 
+            RowBox[{"j", "+", "1"}]}], "]"}], "]"}], ",", "bins1"}], "]"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{
+          RowBox[{"Length", "[", "biomedataFilt", "]"}], "-", "1"}]}], "}"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{"j", ",", "1", ",", 
+         RowBox[{
+          RowBox[{"Length", "@", 
+           RowBox[{"biomedataFilt", "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}], "-", "1"}]}], "}"}]}], "]"}]}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Dimensions", "@", "%"}]}], "Input",
+ CellChangeTimes->{{3.7263375492073927`*^9, 3.7263375629658737`*^9}, {
+   3.726337601925085*^9, 3.7263376097233257`*^9}, 3.726337740665085*^9, {
+   3.726337801455037*^9, 3.726337828490465*^9}, {3.726337941625725*^9, 
+   3.726337976195649*^9}, 3.72633846511686*^9, {3.726338499728559*^9, 
+   3.726338587376524*^9}, {3.726339755775202*^9, 3.726339764334518*^9}, 
+   3.735940750392355*^9, {3.7359407921650333`*^9, 3.735940794493905*^9}, {
+   3.8032892782014933`*^9, 3.803289297087224*^9}},
+ CellLabel->
+  "In[176]:=",ExpressionUUID->"efa02c40-062a-4a8c-bd98-205443200f49"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"123", ",", "2"}], "}"}]], "Output",
+ CellChangeTimes->{3.803289312941402*^9, 3.803291169006806*^9, 
+  3.8032994983086643`*^9, 3.803300265061166*^9, 3.80332983878506*^9, 
+  3.803330728081341*^9, 3.803337015757914*^9, 3.805039381785262*^9, 
+  3.80504107164666*^9, 3.806163924511161*^9, 3.806706039334425*^9, 
+  3.806706185114029*^9, 3.806748724633844*^9, 3.8072942928438187`*^9, 
+  3.8072944902206306`*^9, 3.8072946443409033`*^9, 3.807374116553954*^9, 
+  3.813344983282927*^9, 3.8133461721506567`*^9, 3.813346303253923*^9, 
+  3.819128172838969*^9, 3.857207933960251*^9},
+ CellLabel->
+  "Out[177]=",ExpressionUUID->"0afbc8b6-fb75-4066-a6ac-a61f3e3de8ef"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"tk2", "=", 
+   RowBox[{"MapIndexed", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"FlattenAt", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"#2", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", "#1"}], "}"}], ",", "2"}], 
+       "]"}], "&"}], ",", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"biomedataFilt", "[", 
+          RowBox[{"[", 
+           RowBox[{
+            RowBox[{"k", "+", "1"}], ",", "1"}], "]"}], "]"}], ",", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"intervF1", "[", 
+            RowBox[{
+             RowBox[{"biomedataFilt", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"k", "+", "1"}], ",", 
+                RowBox[{"j", "+", "1"}]}], "]"}], "]"}], ",", 
+             RowBox[{"biomedataFilt", "[", 
+              RowBox[{"[", 
+               RowBox[{"1", ",", 
+                RowBox[{"j", "+", "1"}]}], "]"}], "]"}], ",", "bins1"}], 
+            "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"j", ",", "1", ",", 
+             RowBox[{
+              RowBox[{"Length", "@", 
+               RowBox[{"biomedataFilt", "[", 
+                RowBox[{"[", "1", "]"}], "]"}]}], "-", "1"}]}], "}"}]}], 
+          "]"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", 
+         RowBox[{
+          RowBox[{"Length", "[", "biomedataFilt", "]"}], "-", "1"}]}], 
+        "}"}]}], "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Dimensions", "@", "%"}]}], "Input",
+ CellChangeTimes->{{3.726352344399507*^9, 3.7263523445096903`*^9}, {
+   3.72635239355744*^9, 3.726352449558692*^9}, {3.7263526403713827`*^9, 
+   3.726352649368588*^9}, {3.7263528289702587`*^9, 3.726352878925743*^9}, {
+   3.726496633477819*^9, 3.72649663406781*^9}, {3.7265037029963293`*^9, 
+   3.726503764060066*^9}, 3.72650379563096*^9, {3.726503976939664*^9, 
+   3.726504006589904*^9}, {3.7265040459466248`*^9, 3.726504097644088*^9}, {
+   3.726504137648149*^9, 3.7265041522200947`*^9}, 3.7322045159565907`*^9, {
+   3.7359408130969954`*^9, 3.735940817154149*^9}, {3.803289287818413*^9, 
+   3.803289303539022*^9}},
+ CellLabel->
+  "In[178]:=",ExpressionUUID->"d36d14c2-bdd3-4504-adb5-5f8157e29910"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"123", ",", "3"}], "}"}]], "Output",
+ CellChangeTimes->{3.803289323284823*^9, 3.803291174741118*^9, 
+  3.80329950569493*^9, 3.8033002694448338`*^9, 3.803329846623308*^9, 
+  3.803330731436075*^9, 3.80333702000946*^9, 3.8050393947299356`*^9, 
+  3.805041075117866*^9, 3.806163929278603*^9, 3.806706062268347*^9, 
+  3.806706188883278*^9, 3.806748731011395*^9, 3.80729429964452*^9, 
+  3.80729449471465*^9, 3.8072946472241163`*^9, 3.807374121650927*^9, 
+  3.813344988991619*^9, 3.813346193337569*^9, 3.81334630972961*^9, 
+  3.8191281770553207`*^9, 3.857207939714058*^9},
+ CellLabel->
+  "Out[179]=",ExpressionUUID->"3605376f-90ef-40c8-a59a-945ed7717e77"]
+}, Open  ]],
+
+Cell[TextData[{
+ StyleBox[">>> Zero removal, at some point may wish to include bins for zero \
+abundance, then skip the following step",
+  FontWeight->"Bold"],
+ "\n"
+}], "Text",
+ CellChangeTimes->{{3.802943105015143*^9, 3.802943156693825*^9}, {
+  3.85767222294526*^9, 
+  3.857672234513012*^9}},ExpressionUUID->"2a6dd1eb-555e-43b9-ad28-\
+e47f15dc6012"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"tk1", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"tk1", "[", 
+        RowBox[{"[", 
+         RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"Select", "[", 
+        RowBox[{
+         RowBox[{"tk1", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", ",", "2"}], "]"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"StringContainsQ", "[", 
+            RowBox[{"#", ",", "\"\<zero\>\""}], "]"}], "\[Equal]", "False"}], 
+          "&"}]}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "tk1", "]"}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Dimensions", "@", "%"}]}], "Input",
+ CellChangeTimes->{{3.750864673934799*^9, 3.750864713600685*^9}, {
+  3.750864749675426*^9, 3.750864750239686*^9}, {3.8032893359749823`*^9, 
+  3.803289341147542*^9}},
+ CellLabel->
+  "In[180]:=",ExpressionUUID->"15643cf3-a35b-4b6f-9c5d-944ef86ee403"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"123", ",", "2"}], "}"}]], "Output",
+ CellChangeTimes->{3.803289342812415*^9, 3.803291178496504*^9, 
+  3.803299510657424*^9, 3.8033002737396584`*^9, 3.8033298537201843`*^9, 
+  3.8033307380233927`*^9, 3.803337025348789*^9, 3.805039401043623*^9, 
+  3.8050410783021793`*^9, 3.8061639401885653`*^9, 3.8067060654282207`*^9, 
+  3.806706192459856*^9, 3.806748862850004*^9, 3.807294307533761*^9, 
+  3.80729465064005*^9, 3.807374124058*^9, 3.8133450137182417`*^9, 
+  3.81334631415637*^9, 3.819128186862381*^9, 3.857207949393076*^9},
+ CellLabel->
+  "Out[181]=",ExpressionUUID->"86489d66-0a29-494c-965e-92f898ffa01c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"tk2", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"tk2", "[", 
+        RowBox[{"[", 
+         RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", 
+       RowBox[{"tk2", "[", 
+        RowBox[{"[", 
+         RowBox[{"i", ",", "2"}], "]"}], "]"}], ",", 
+       RowBox[{"Select", "[", 
+        RowBox[{
+         RowBox[{"tk2", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", ",", "3"}], "]"}], "]"}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"StringContainsQ", "[", 
+            RowBox[{"#", ",", "\"\<zero\>\""}], "]"}], "\[Equal]", "False"}], 
+          "&"}]}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", "tk2", "]"}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Dimensions", "@", "%"}]}], "Input",
+ CellChangeTimes->{{3.750864673934799*^9, 3.750864713600685*^9}, {
+  3.750864749675426*^9, 3.750864816977779*^9}, {3.7508648547133017`*^9, 
+  3.750864855043214*^9}, {3.7508674974151707`*^9, 3.750867502323113*^9}, {
+  3.803289354812953*^9, 3.8032893555841513`*^9}},
+ CellLabel->
+  "In[182]:=",ExpressionUUID->"f1de2f29-41ed-4a4e-acab-a739a3976edf"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"123", ",", "3"}], "}"}]], "Output",
+ CellChangeTimes->{3.803289378279139*^9, 3.803291181936014*^9, 
+  3.803299514229941*^9, 3.803300276531876*^9, 3.8033298562333508`*^9, 
+  3.803330743510311*^9, 3.803337027435692*^9, 3.805039404751165*^9, 
+  3.805041080229241*^9, 3.80616394279221*^9, 3.8067060686135187`*^9, 
+  3.806706195673089*^9, 3.806748864489563*^9, 3.807294309543571*^9, 
+  3.807294500806436*^9, 3.807294653149727*^9, 3.807374126625753*^9, 
+  3.813345015928454*^9, 3.813346316795981*^9, 3.819128192452497*^9, 
+  3.8572079532505293`*^9},
+ CellLabel->
+  "Out[183]=",ExpressionUUID->"daa0341b-e534-4bab-b5b7-2701503caf60"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"tk1", "[", 
+  RowBox[{"[", "1", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.857672824094187*^9, 3.857672826287066*^9}},
+ CellLabel->
+  "In[1182]:=",ExpressionUUID->"e924c208-c47c-4172-b50e-18396157aee9"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Propionibacterium_acnes-14\"\>", 
+     ",", "\<\"Veillonella-9\"\>", ",", "\<\"Klebsiella-10\"\>", 
+     ",", "\<\"Streptococcus-12\"\>"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.857672826678274*^9},
+ CellLabel->
+  "Out[1182]=",ExpressionUUID->"e96bbd34-97c1-43b5-8ca4-7f8454d24614"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"tk2", "[", 
+  RowBox[{"[", "1", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.857672829522583*^9, 3.857672834805518*^9}},
+ CellLabel->
+  "In[1183]:=",ExpressionUUID->"ecb9552c-bed9-4f71-b016-63d516b0e027"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "\<\"2016P1_lbc10\"\>", ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Propionibacterium_acnes-14\"\>", 
+     ",", "\<\"Veillonella-9\"\>", ",", "\<\"Klebsiella-10\"\>", 
+     ",", "\<\"Streptococcus-12\"\>"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.857672835309156*^9},
+ CellLabel->
+  "Out[1183]=",ExpressionUUID->"94488005-fe2b-430b-a502-6727f966b069"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 710},
+WindowMargins->{{Automatic, 276}, {Automatic, 44}},
+FrontEndVersion->"13.0 for Mac OS X x86 (64-bit) (December 2, 2021)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"2a5e90c6-9691-430e-882f-8b009f12ba76"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 216, 6, 30, "Input",ExpressionUUID->"378874d9-893a-424b-932f-2928d53da1a4"],
+Cell[777, 28, 81, 0, 30, "Input",ExpressionUUID->"168be70a-b23e-4aa2-bbcf-081a8e5e3252"],
+Cell[CellGroupData[{
+Cell[883, 32, 159, 3, 67, "Section",ExpressionUUID->"86c95e37-f3ae-4437-97c8-274617d39fc5"],
+Cell[1045, 37, 647, 14, 127, "Text",ExpressionUUID->"811d76f6-43b9-4366-a4c1-9d6b6055a612"],
+Cell[CellGroupData[{
+Cell[1717, 55, 239, 5, 30, "Input",ExpressionUUID->"d036156b-fd48-433b-a43e-604552800ac3"],
+Cell[1959, 62, 3174, 44, 245, "Output",ExpressionUUID->"928c59db-893b-4264-993b-79c9f0059f41"]
+}, Open  ]],
+Cell[5148, 109, 239, 5, 30, "Input",ExpressionUUID->"a7f1369b-998d-4cf8-b55b-38add9e4ef75"],
+Cell[5390, 116, 7506, 118, 1102, InheritFromParent,ExpressionUUID->"05ac5c29-56c0-4373-a755-74b31fa178cd"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12933, 239, 163, 3, 67, "Section",ExpressionUUID->"befe17dc-dc05-4c04-a6cd-fa47526e1fa8"],
+Cell[CellGroupData[{
+Cell[13121, 246, 217, 4, 54, "Subsection",ExpressionUUID->"ce327054-3205-4655-846b-3a18c3e89c77"],
+Cell[CellGroupData[{
+Cell[13363, 254, 1518, 36, 178, "Input",ExpressionUUID->"334d2b31-c5bd-4516-bec9-402cc6e26276"],
+Cell[14884, 292, 1525, 24, 56, "Output",ExpressionUUID->"2b1e281b-502b-41ad-a3ee-b874b5dbcde6"],
+Cell[16412, 318, 1525, 24, 56, "Output",ExpressionUUID->"bc563ac2-d883-438f-97b2-dba2d71ebff0"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17974, 347, 203, 4, 30, "Input",ExpressionUUID->"44213d52-e4a3-42e1-aa79-ef98685f0796"],
+Cell[18180, 353, 176, 3, 34, "Output",ExpressionUUID->"d32303e0-4ec1-410c-85b5-686273687cdc"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18393, 361, 288, 6, 30, "Input",ExpressionUUID->"6cb63304-6416-4c44-8845-36985d804f6b"],
+Cell[18684, 369, 1169, 30, 264, "Output",ExpressionUUID->"9cbeb7db-ce10-4412-9f21-f2fc23493502"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19902, 405, 171, 3, 54, "Subsection",ExpressionUUID->"12799233-24f7-461b-9b7c-4eee8baf2bd2"],
+Cell[20076, 410, 370, 8, 81, "Text",ExpressionUUID->"4ccf5767-7277-4f38-a9b3-6a2e7340342f"],
+Cell[20449, 420, 81, 0, 30, "Input",ExpressionUUID->"6de283dd-9d8b-46e5-ad8e-2f29194d8a35"],
+Cell[CellGroupData[{
+Cell[20555, 424, 1765, 45, 94, "Input",ExpressionUUID->"efa02c40-062a-4a8c-bd98-205443200f49"],
+Cell[22323, 471, 691, 12, 34, "Output",ExpressionUUID->"0afbc8b6-fb75-4066-a6ac-a61f3e3de8ef"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23051, 488, 2317, 58, 115, "Input",ExpressionUUID->"d36d14c2-bdd3-4504-adb5-5f8157e29910"],
+Cell[25371, 548, 686, 12, 34, "Output",ExpressionUUID->"3605376f-90ef-40c8-a59a-945ed7717e77"]
+}, Open  ]],
+Cell[26072, 563, 351, 9, 81, "Text",ExpressionUUID->"2a6dd1eb-555e-43b9-ad28-e47f15dc6012"],
+Cell[CellGroupData[{
+Cell[26448, 576, 1030, 29, 73, "Input",ExpressionUUID->"15643cf3-a35b-4b6f-9c5d-944ef86ee403"],
+Cell[27481, 607, 645, 11, 34, "Output",ExpressionUUID->"86489d66-0a29-494c-965e-92f898ffa01c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28163, 623, 1233, 33, 94, "Input",ExpressionUUID->"f1de2f29-41ed-4a4e-acab-a739a3976edf"],
+Cell[29399, 658, 666, 12, 34, "Output",ExpressionUUID->"daa0341b-e534-4bab-b5b7-2701503caf60"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30102, 675, 229, 5, 30, "Input",ExpressionUUID->"e924c208-c47c-4172-b50e-18396157aee9"],
+Cell[30334, 682, 376, 9, 34, "Output",ExpressionUUID->"e96bbd34-97c1-43b5-8ca4-7f8454d24614"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30747, 696, 229, 5, 30, "Input",ExpressionUUID->"ecb9552c-bed9-4f71-b016-63d516b0e027"],
+Cell[30979, 703, 405, 9, 104, "Output",ExpressionUUID->"94488005-fe2b-430b-a502-6727f966b069"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
