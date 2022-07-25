@@ -61,7 +61,3 @@ allTable7.tsv: this file has a mix of input objects, corresponding normalized ab
 
 note: the main result for this notebook is the graph which we have not stored as 
 separate files. See the figures in the paper.
-
-The following files are submitted with the paper:
-
-
