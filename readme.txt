@@ -1,27 +1,29 @@
 The following files are submitted with the paper and posted in GitHub
 
-
+1) Excel spreadsheet with selected input, intermediate and results files
+alzheimers_input_data_and_results.xlsx 
+See readme tab in the spreadsheet
 
 The following Mathematica notebooks (code) and files are posted in GitHub at:
 https://github.com/jlapides/MLDA.
 Note: with have added a letter prefix to show which data files are associated with each notebook. If you wish to use the data files, remove the prefix as the notebook input code does not include the prefix. 
 
 
-1) binning_and_object_computation_paper_v1.nb 
+2) a_binning_and_object_computation_paper_v1.nb 
 
 input files:
 biomedataFilt.csv 
 
 results files:
-microbiome_alzheimer's_input_11_s1.tsv
-microbiome_alzheimer's_input_11a_s1.tsv 
+a_microbiome_alzheimer's_input_11_s1.tsv
+a_microbiome_alzheimer's_input_11a_s1.tsv 
 
-2) classification_model_7_alzheimers_paper_v1.nb
+3) b_classification_model_7_alzheimers_paper_v1.nb
 
 input files:
-microbiome_alzheimer's_input_11_s1.tsv
-microbiome_alzheimer's_input_11a_s1.tsv
-md1UAMS.csv
+b_microbiome_alzheimer's_input_11_s1.tsv
+b_microbiome_alzheimer's_input_11a_s1.tsv
+b_md1UAMS.csv
 
 results files:
 There are several files whose variable names we list and describe below.
@@ -49,19 +51,17 @@ All of the following variables can also be exported by the code with computed fi
 >>> readme: user description of current run plus automated logging of parameters
 
 
-3) graph_alzheimers_paper.nb
+4) c_graph_alzheimers_paper.nb
 
 input files:
-Alzheimers_AK_5_topics_a_0P3_b_0P25_cut_1_12.15rrtst_docTopicSum.csv
+c_Alzheimers_AK_5_topics_a_0P3_b_0P25_cut_1_12.15rrtst_docTopicSum.csv
 
 results files:
-allTable7.tsv: this file has a mix of input objects, corresponding normalized abundance data, metadata, sample id, subject id and class components for data exploration. It is loaded at the end.
+c_allTable7.tsv: this file has a mix of input objects, corresponding normalized abundance data, metadata, sample id, subject id and class components for data exploration. It is loaded at the end.
 
 note: the main result for this notebook is the graph which we have not stored as 
 separate files. See the figures in the paper.
 
 The following files are submitted with the paper:
 
-4) Excel spreadsheet with selected input, intermediate  and results files
-alzheimers_input_data_and_results.xlsx 
-See readme tab in the spreadsheet
+
