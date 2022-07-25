@@ -9,7 +9,7 @@ https://github.com/jlapides/MLDA.
 Note: with have added a letter prefix to show which data files are associated with each notebook. If you wish to use the data files, remove the prefix as the notebook input code does not include the prefix. 
 
 
-2) a_binning_and_object_computation_paper_v1.nb 
+2) binning_and_object_computation_paper_v1.nb 
 
 input files:
 biomedataFilt.csv 
@@ -51,7 +51,7 @@ All of the following variables can also be exported by the code with computed fi
 >>> readme: user description of current run plus automated logging of parameters
 
 
-4) c_graph_alzheimers_paper.nb
+4) graph_alzheimers_paper.nb
 
 input files:
 Alzheimers_AK_5_topics_a_0P3_b_0P25_cut_1_12.15rrtst_docTopicSum.csv
