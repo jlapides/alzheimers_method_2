@@ -15,15 +15,15 @@ input files:
 biomedataFilt.csv 
 
 results files:
-a_microbiome_alzheimer's_input_11_s1.tsv
-a_microbiome_alzheimer's_input_11a_s1.tsv 
+microbiome_alzheimer's_input_11_s1.tsv
+microbiome_alzheimer's_input_11a_s1.tsv 
 
-3) b_classification_model_7_alzheimers_paper_v1.nb
+3) classification_model_7_alzheimers_paper_v1.nb
 
 input files:
-b_microbiome_alzheimer's_input_11_s1.tsv
-b_microbiome_alzheimer's_input_11a_s1.tsv
-b_md1UAMS.csv
+microbiome_alzheimer's_input_11_s1.tsv
+microbiome_alzheimer's_input_11a_s1.tsv
+md1UAMS.csv
 
 results files:
 There are several files whose variable names we list and describe below.
@@ -54,10 +54,10 @@ All of the following variables can also be exported by the code with computed fi
 4) c_graph_alzheimers_paper.nb
 
 input files:
-c_Alzheimers_AK_5_topics_a_0P3_b_0P25_cut_1_12.15rrtst_docTopicSum.csv
+Alzheimers_AK_5_topics_a_0P3_b_0P25_cut_1_12.15rrtst_docTopicSum.csv
 
 results files:
-c_allTable7.tsv: this file has a mix of input objects, corresponding normalized abundance data, metadata, sample id, subject id and class components for data exploration. It is loaded at the end.
+allTable7.tsv: this file has a mix of input objects, corresponding normalized abundance data, metadata, sample id, subject id and class components for data exploration. It is loaded at the end.
 
 note: the main result for this notebook is the graph which we have not stored as 
 separate files. See the figures in the paper.
