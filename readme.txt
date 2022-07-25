@@ -1,8 +1,8 @@
 The following files are submitted with the paper and posted in GitHub
 
-1) Excel spreadsheet with selected input, intermediate and results files
-alzheimers_input_data_and_results.xlsx 
+1) alzheimers_input_data_and_results.xlsx 
 See readme tab in the spreadsheet
+includes a spreadsheet which shows a succession of files beginning with raw OTU data proceeding through various background removal and name summing stages to the normalized abundances, microbial objects, rebinning and renaming results,  and metadata. It also includes mold results: sample class distributions and approximate class counts for each microbial object.
 
 The following Mathematica notebooks (code) and files are posted in GitHub at:
 https://github.com/jlapides/MLDA.
