@@ -1,5 +1,7 @@
 Below is a description of the files available for the second method - MLDA - for Combinations of Bacteria.
 
+NOTE: The easiest way to download anything from this folder is to click the green code button then download a zip file of everything.
+
 1) additional_file_4_alzheimers_input_data_and_results.xlsx (multiple worksheets, 877 KB)
 See readme tab in the spreadsheet for descriptions of each tab.
 Shows a succession of files beginning with raw OTU data proceeding through various background removal and name summing stages. 
