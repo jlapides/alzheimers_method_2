@@ -1,4 +1,4 @@
-Below is a description of the files available for the second method - MLDA - for Combinations of Bacteria
+Below is a description of the files available for the second method - MLDA - for Combinations of Bacteria.
 
 1) additional_file_4_alzheimers_input_data_and_results.xlsx (multiple worksheets, 877 KB)
 See readme tab in the spreadsheet for descriptions of each tab.
